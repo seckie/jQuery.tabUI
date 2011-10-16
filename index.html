@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>jQuery.tabUI</title>
+<link rel="stylesheet" href="jquery.tabui.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script src="jquery.tabui.js"></script>
+<script>
+$(function() {
+
+$('div.nav').find('a').tabUI({
+	classNamePostfix: '_on',
+	onClassName: 'on',
+	offClassName: 'off',
+	defaultIndex: 0
+});
+
+// ToDo:
+// orgClassname, newClassName are useless? at line 78, 79
+// onClassName, offClassName options are not used. -> add code to use them.
+
+});
+
+// "console" object for Legacy Browsers
+if (!console) { var console = { log: function() { var s = ''; for (var i=0, l=arguments.length; i<l; i++) { s += arguments[i]; } alert(s); } }; }
+</script>
+<style>
+
+</style>
+</head>
+<body class="tabUIContents">
+
+<div class="nav">
+<ul>
+<li class="tab1"><a href="#section1" class="tabstyle">セクション1</a></li>
+<li class="tab2"><a href="#section2" class="tabstyle">セクション2</a></li>
+<li class="tab3"><a href="#section3" class="tabstyle">セクション3</a></li>
+</ul>
+<!--/.nav--></div>
+
+<div class="contents">
+	
+<div class="section" id="section1">
+<h2>Section 1</h2>
+<p>Hello world 1!!</p>
+<!--/#section1--></div>
+
+<div class="section" id="section2">
+<h2>Section 2</h2>
+<p>Hello world 2!!</p>
+<p>Hello world 2!!</p>
+<p>Hello world 2!!</p>
+<!--/#section2--></div>
+
+<div class="section" id="section3">
+<h2>Section 3</h2>
+<p>Hello world 3!!</p>
+<p>Hello world 3!!</p>
+<p>Hello world 3!!</p>
+<p>Hello world 3!!</p>
+<p>Hello world 3!!</p>
+<p>Hello world 3!!</p>
+<!--/#section3--></div>
+
+<!--/.contents--></div>
+
+</body>
+</html>
