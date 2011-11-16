@@ -37,6 +37,7 @@ TabUI.prototype = {
 		this.element.each(function (i, tab) {
 			self._initTab($(tab));
 		});
+		var container = this.targets[0].parent();
 		this.targets[this.defaultIndex].show();
 		this.element.click(function (e) {
 			var $this = $(this);
@@ -52,13 +53,6 @@ TabUI.prototype = {
 		// process to change tab status
 		this.element.each(function (i, tab) {
 			self._initTabStyle($(tab));
-		});
-
-		// for change effect
-		var container = this.targets[0].parent();
-		container.css({
-			overflow: 'hidden',
-			height: container.height()
 		});
 	},
 
@@ -95,10 +89,18 @@ TabUI.prototype = {
 	 */
 	_show: function (element, container) {
 		element.css('visibility', 'hidden').show();
-		container.animate({
+		// for change effect
+		container.css({
+			overflow: 'hidden',
+			height: container.height()
+		}).animate({
 			height: element.outerHeight()
 		}, function() {
 			element.hide().css('visibility', 'visible').fadeIn();
+			container.css({
+				overflow: '',
+				height: ''
+			});
 		});
 	},
 
