@@ -7,13 +7,12 @@
  * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
  * @version    1.1
  * @since      2011-09-14 17:57:34
- * @update     2011-10-16 15:20:25
  */
 
 (function($) {
 
 $.fn.tabUI = function (options) {
-	var opt = (options) ? options : {};
+	var opt = options || {};
 	opt.element = this;
 	this.data('tabUI', new TabUI(opt));
 	return this;
