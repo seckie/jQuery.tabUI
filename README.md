@@ -43,7 +43,8 @@ Select tab navigation links with jQuery selector and call "tabUI" method when DO
 			classNamePostfix: '_on',
 			onClassName: 'on',
 			offClassName: 'off',
-			defaultIndex: 0
+			defaultIndex: 0,
+			effect: true
 		});
 	});
 
@@ -130,7 +131,12 @@ It doesn't have to be horizontal tabbed UI. Please write freely.
 <tr>
 <td>defaultIndex</td>
 <td>0</td>
-<td>Number that represents index of content to show when the page is loaded.</td>
+<td>Number represents index of content to show when the page is loaded.</td>
+</tr>
+<tr>
+<td>effect</td>
+<td>true</td>
+<td>Boolean that represents contents switching has a fade effect or not.</td>
 </tr>
 </tbody>
 </table>

@@ -27,7 +27,8 @@ TabUI.prototype = {
 		classNamePostfix: '',
 		onClassName: 'on',
 		offClassName: 'off',
-		defaultIndex: 0
+		defaultIndex: 0,
+		effect: true
 	},
 	_create: function () {
 		var self = this;
@@ -87,8 +88,13 @@ TabUI.prototype = {
 	 * function to change effect
 	 */
 	_show: function (element, container) {
+		if (!this.effect) {
+			// no effect
+			element.show();
+			return;
+		}
+		// with effect
 		element.css('visibility', 'hidden').show();
-		// for change effect
 		container.css({
 			overflow: 'hidden',
 			height: container.height()
