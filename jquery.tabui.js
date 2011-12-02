@@ -38,7 +38,12 @@ TabUI.prototype = {
 			self._initTab($(tab));
 		});
 		var container = this.targets[0].parent();
+
+		// initial content
 		this.targets[this.defaultIndex].show();
+		$(this.element[0]).addClass(this.onClassName);
+		
+		// bind event
 		this.element.click(function (e) {
 			var $this = $(this);
 			$.each(self.targets, function (i, target) {
@@ -77,8 +82,10 @@ TabUI.prototype = {
 			self.element.each(function (i, tab) {
 				if (clickedTab === tab) {
 					tab.className = self._addPostfix(tab.className);
+					$(tab).addClass(self.onClassName);
 				} else {
 					tab.className = self._removePostfix(tab.className);
+					$(tab).removeClass(self.onClassName);
 				}
 			});
 		});
