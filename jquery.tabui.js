@@ -74,8 +74,7 @@ TabUI.prototype = {
 	 */
 	_initTabStyle: function (tab) {
 		var self = this,
-			orgClassName = tab[0].className,
-			newClassName = this._addPostfix(orgClassName);
+			orgClassName = tab[0].className;
 
 		this.element.click(function (e) {
 			var clickedTab = this;
