@@ -136,7 +136,7 @@ It doesn't have to be horizontal tabbed UI. Please write freely.
 <tr>
 <td>effect</td>
 <td>true</td>
-<td>Boolean that represents contents switching has a fade effect or not.</td>
+<td>Boolean represents contents switching has a fade effect or not.</td>
 </tr>
 </tbody>
 </table>
