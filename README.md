@@ -49,6 +49,7 @@ Select tab navigation links with jQuery selector and call "tabUI" method when DO
 
 ### CSS example
 It doesn't have to be horizontal tabbed UI. Please write freely.
+
 	.tabUIContents {
 		margin: 0 auto;
 		padding: 40px 0;
