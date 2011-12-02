@@ -40,8 +40,17 @@ TabUI.prototype = {
 		var container = this.targets[0].parent();
 
 		// initial content
-		this.targets[this.defaultIndex].show();
-		$(this.element[0]).addClass(this.onClassName);
+		var defaultTarget = this.targets[this.defaultIndex];
+		var defaultTab = this.element[this.defaultIndex];
+		defaultTarget.show();
+		defaultTab.className = this._addPostfix(defaultTab.className);
+		this.element.each(function (i, tab) {
+			if (i === self.defaultIndex) {
+				$(tab).addClass(self.onClassName);
+			} else {
+				$(tab).addClass(self.offClassName);
+			}
+		});
 		
 		// bind event
 		this.element.click(function (e) {
@@ -79,12 +88,13 @@ TabUI.prototype = {
 		this.element.click(function (e) {
 			var clickedTab = this;
 			self.element.each(function (i, tab) {
+				$(tab).removeClass(self.offClassName).removeClass(self.onClassName);
 				if (clickedTab === tab) {
 					tab.className = self._addPostfix(tab.className);
 					$(tab).addClass(self.onClassName);
 				} else {
 					tab.className = self._removePostfix(tab.className);
-					$(tab).removeClass(self.onClassName);
+					$(tab).addClass(self.offClassName);
 				}
 			});
 		});

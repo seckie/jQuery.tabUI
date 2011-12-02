@@ -111,6 +111,7 @@ html {
 .nav li {
 	float: left;
 	width: 140px;
+	padding-top: 5px;
 	margin-bottom: -1px;
 	list-style-type: none;
 }
@@ -134,10 +135,12 @@ html {
 	text-decoration: none;
 }
 .nav li a.on {
-	background-color: #9ff;
+	margin-top: -.25em;
+	padding-top: .75em;
+	background-color: #dff;
 }
 .nav li a.off {
-	background-color: #ccc;
+	background-color: #eee;
 }
 .contents {
 	position: relative;
