@@ -68,7 +68,11 @@ TabUI.prototype = {
 		var self = this;
 		this.element.click(function (e) {
 			var clickedTab = this;
-			self._show($(this).data('target'));
+			if (self.container.is(':animated')) {
+				// animation is in progress
+				return false;
+			}
+			self._show($(clickedTab).data('target'));
 			self.element.each(function (i, tab) {
 				$(tab).removeClass(self.options.offClassName).removeClass(self.options.onClassName);
 				if (clickedTab === tab) {
