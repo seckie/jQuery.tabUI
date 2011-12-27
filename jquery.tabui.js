@@ -39,7 +39,7 @@ TabUI.prototype = {
 		this.element.each(function (i, tab) {
 			self._initTab($(tab));
 		});
-		var container = this.targets[0].parent();
+		this.container = this.targets[0].parent();
 
 		// initial content
 		var defaultTarget = this.targets[this.options.defaultIndex];
@@ -53,17 +53,7 @@ TabUI.prototype = {
 				$(tab).addClass(self.options.offClassName);
 			}
 		});
-		
-		// bind event
-		this.element.click(function (e) {
-			self._show($(this).data('target'), container);
-			e.preventDefault();
-		});
-
-		// process to change tab status
-		this.element.each(function (i, tab) {
-			self._initTabStyle($(tab));
-		});
+		self._initTabStyle();
 	},
 
 	_initTab: function (tab) {
@@ -77,12 +67,11 @@ TabUI.prototype = {
 	/**
 	 * functions to change tab status
 	 */
-	_initTabStyle: function (tab) {
-		var self = this,
-			orgClassName = tab[0].className;
-
+	_initTabStyle: function () {
+		var self = this;
 		this.element.click(function (e) {
 			var clickedTab = this;
+			self._show($(this).data('target'));
 			self.element.each(function (i, tab) {
 				$(tab).removeClass(self.options.offClassName).removeClass(self.options.onClassName);
 				if (clickedTab === tab) {
@@ -93,14 +82,16 @@ TabUI.prototype = {
 					$(tab).addClass(self.options.offClassName);
 				}
 			});
+			e.preventDefault();
 		});
 	},
 
 	/**
 	 * function to change effect
 	 */
-	_show: function (element, container) {
-		var currentHeight = container.height(); // save height
+	_show: function (element) {
+		var self = this;
+		var currentHeight = this.container.height(); // save height
 		$.each(this.targets, function (i, target) {
 			if (target != element) {
 				target.hide();
@@ -110,14 +101,14 @@ TabUI.prototype = {
 		});
 		if (this.options.effect) {
 			// with effect
-			container.stop(true, true).css({
+			this.container.stop(true, true).css({
 				overflow: 'hidden',
 				height: currentHeight 
 			}).animate({
 				height: element.outerHeight()
 			}, 500, function() {
 				element.hide().css('visibility', 'visible').fadeIn();
-				container.css({
+				self.container.css({
 					overflow: '',
 					height: ''
 				});
