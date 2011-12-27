@@ -92,10 +92,17 @@ input, select { vertical-align:middle; }/*}}}*/
 html {
 	overflow-y: scroll;
 }
+h1 {
+	margin: 1em 10px;
+	font-size: 150%;
+}
 .tabUIContents {
-	margin: 0 auto;
-	padding: 40px 0;
-	width: 600px;
+	float: left;
+	width: 440px;
+	margin: 0 10px;
+}
+.tabUIContents h2 {
+	margin-bottom: 1em;
 }
 .nav {
 	position: relative;

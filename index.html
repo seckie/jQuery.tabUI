@@ -9,11 +9,19 @@
 <script>
 $(function() {
 
-$('div.nav').find('a').tabUI({
+$('#tabsection1 div.nav a').tabUI({
 	classNamePostfix: '_on',
 	onClassName: 'on',
 	offClassName: 'off',
 	defaultIndex: 0
+});
+
+$('#tabsection2 div.nav a').tabUI({
+	classNamePostfix: '_on',
+	onClassName: 'on',
+	offClassName: 'off',
+	defaultIndex: 0,
+	effect: false
 });
 
 });
@@ -25,8 +33,11 @@ if (!console) { var console = { log: function() { var s = ''; for (var i=0, l=ar
 
 </style>
 </head>
-<body class="tabUIContents">
+<body>
+<h1>jQuery.tabUI Demos</h1>
 
+<div class="tabUIContents" id="tabsection1">
+<h2>With switching effect</h2>
 <div class="nav">
 <ul>
 <li class="tab1"><a href="#section1" class="tabstyle">セクション1</a></li>
@@ -60,6 +71,44 @@ if (!console) { var console = { log: function() { var s = ''; for (var i=0, l=ar
 <!--/#section3--></div>
 
 <!--/.contents--></div>
+<!--/#tabsection1--></div>
+
+<div class="tabUIContents" id="tabsection2">
+<h2>With no effect</h2>
+<div class="nav">
+<ul>
+<li class="tab1"><a href="#section1" class="tabstyle">セクション1</a></li>
+<li class="tab2"><a href="#section2" class="tabstyle">セクション2</a></li>
+<li class="tab3"><a href="#section3" class="tabstyle">セクション3</a></li>
+</ul>
+<!--/.nav--></div>
+
+<div class="contents">
+	
+<div class="section" id="section1">
+<h2>Section 1</h2>
+<p>Hello world 1!!</p>
+<!--/#section1--></div>
+
+<div class="section" id="section2">
+<h2>Section 2</h2>
+<p>Hello world 2!!</p>
+<p>Hello world 2!!</p>
+<p>Hello world 2!!</p>
+<!--/#section2--></div>
+
+<div class="section" id="section3">
+<h2>Section 3</h2>
+<p>Hello world 3!!</p>
+<p>Hello world 3!!</p>
+<p>Hello world 3!!</p>
+<p>Hello world 3!!</p>
+<p>Hello world 3!!</p>
+<p>Hello world 3!!</p>
+<!--/#section3--></div>
+
+<!--/.contents--></div>
+<!--/#tabsection2--></div>
 
 </body>
 </html>
