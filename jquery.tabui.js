@@ -121,7 +121,7 @@ TabUI.prototype = {
 			});
 		} else {
 			// no effect
-			target.css('visibility', 'show');
+			element.css('visibility', 'visible');
 		}
 	},
 
