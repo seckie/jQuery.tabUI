@@ -5,7 +5,7 @@
  * @author     Naoki Sekiguchi (http://likealunatic.jp)
  * @copyright  Naoki Sekiguchi (http://likealunatic.jp)
  * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
- * @version    1.2
+ * @version    1.3
  * @since      2011-09-14 17:57:34
  */
 
@@ -54,6 +54,7 @@ TabUI.prototype = {
 			}
 		});
 		self._bindEvent();
+		self._watchURI();
 	},
 
 	_initTab: function (tab) {
@@ -114,6 +115,30 @@ TabUI.prototype = {
 		} else {
 			// no effect
 			element.css('visibility', 'show');
+		}
+	},
+
+	_watchURI: function () {
+		var self = this;
+		// initial hash modulation
+		var target = this._getTargetFromURI(location.href);
+		if (target) {
+			this._show(target);
+		}
+	},
+
+	_getTargetFromURI: function (uri) {
+		var target;
+		var hash = "";
+		var hashRegExp = /#[a-zA-Z0-9\-_]+$/;
+		if (hashRegExp.test(uri)) {
+			hash = uri.slice(uri.search(hashRegExp));
+			$.each(this.targets, function () {
+				if ($(hash)[0] === this[0]) { target = $(hash); }
+			});
+			return target;
+		} else {
+			return false;
 		}
 	},
 
