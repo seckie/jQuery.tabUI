@@ -74,17 +74,22 @@ TabUI.prototype = {
 				return false;
 			}
 			self._show($(clickedTab).data('target'));
-			self.element.each(function (i, tab) {
-				$(tab).removeClass(self.options.offClassName).removeClass(self.options.onClassName);
-				if (clickedTab === tab) {
-					tab.className = self._addPostfix(tab.className);
-					$(tab).addClass(self.options.onClassName);
-				} else {
-					tab.className = self._removePostfix(tab.className);
-					$(tab).addClass(self.options.offClassName);
-				}
-			});
+			self._switchTab(clickedTab);
 			e.preventDefault();
+		});
+	},
+
+	_switchTab: function (clickedTab) {
+		var self = this;
+		this.element.each(function (i, tab) {
+			$(tab).removeClass(self.options.offClassName).removeClass(self.options.onClassName);
+			if (clickedTab === tab) {
+				tab.className = self._addPostfix(tab.className);
+				$(tab).addClass(self.options.onClassName);
+			} else {
+				tab.className = self._removePostfix(tab.className);
+				$(tab).addClass(self.options.offClassName);
+			}
 		});
 	},
 
@@ -124,6 +129,7 @@ TabUI.prototype = {
 		var target = this._getTargetFromURI(location.href);
 		if (target) {
 			this._show(target);
+			this._switchTab();
 		}
 	},
 
