@@ -5,7 +5,7 @@
  * @author     Naoki Sekiguchi (http://likealunatic.jp)
  * @copyright  Naoki Sekiguchi (http://likealunatic.jp)
  * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
- * @version    1.1
+ * @version    1.2
  * @since      2011-09-14 17:57:34
  */
 
@@ -18,7 +18,9 @@ $.fn.tabUI = function (options) {
 	return this;
 };
 function TabUI() {
-	$.extend(this, this.defaultOptions, arguments[0]);
+	this.options = {};
+	$.extend(this.options, this.defaultOptions, arguments[0]);
+	this.element = this.options.element;
 	this._create();
 }
 TabUI.prototype = {
@@ -40,15 +42,15 @@ TabUI.prototype = {
 		var container = this.targets[0].parent();
 
 		// initial content
-		var defaultTarget = this.targets[this.defaultIndex];
-		var defaultTab = this.element[this.defaultIndex];
+		var defaultTarget = this.targets[this.options.defaultIndex];
+		var defaultTab = this.element[this.options.defaultIndex];
 		defaultTarget.show();
 		defaultTab.className = this._addPostfix(defaultTab.className);
 		this.element.each(function (i, tab) {
-			if (i === self.defaultIndex) {
-				$(tab).addClass(self.onClassName);
+			if (i === self.options.defaultIndex) {
+				$(tab).addClass(self.options.onClassName);
 			} else {
-				$(tab).addClass(self.offClassName);
+				$(tab).addClass(self.options.offClassName);
 			}
 		});
 		
@@ -88,13 +90,13 @@ TabUI.prototype = {
 		this.element.click(function (e) {
 			var clickedTab = this;
 			self.element.each(function (i, tab) {
-				$(tab).removeClass(self.offClassName).removeClass(self.onClassName);
+				$(tab).removeClass(self.options.offClassName).removeClass(self.options.onClassName);
 				if (clickedTab === tab) {
 					tab.className = self._addPostfix(tab.className);
-					$(tab).addClass(self.onClassName);
+					$(tab).addClass(self.options.onClassName);
 				} else {
 					tab.className = self._removePostfix(tab.className);
-					$(tab).addClass(self.offClassName);
+					$(tab).addClass(self.options.offClassName);
 				}
 			});
 		});
@@ -104,7 +106,7 @@ TabUI.prototype = {
 	 * function to change effect
 	 */
 	_show: function (element, container) {
-		if (!this.effect) {
+		if (!this.options.effect) {
 			// no effect
 			element.show();
 			return;
@@ -130,7 +132,7 @@ TabUI.prototype = {
 	 */
 	_addPostfix: function (className) {
 		var self = this,
-			postfix = self.classNamePostfix,
+			postfix = self.options.classNamePostfix,
 			textArray = className.split(/\s/);
 		$.each(textArray, function (i, text) {
 			// prevent double postfix
@@ -145,7 +147,7 @@ TabUI.prototype = {
 	},
 	_removePostfix: function (className) {
 		var self = this,
-			postfix = self.classNamePostfix,
+			postfix = self.options.classNamePostfix,
 			textArray = className.split(/\s/);
 		$.each(textArray, function (i, text) {
 			var postfixPos = text.lastIndexOf(postfix);
