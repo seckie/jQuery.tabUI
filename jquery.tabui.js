@@ -56,13 +56,7 @@ TabUI.prototype = {
 		
 		// bind event
 		this.element.click(function (e) {
-			var $this = $(this);
-			$.each(self.targets, function (i, target) {
-				if (target != $this) {
-					target.hide();
-				}
-			});
-			self._show($this.data('target'), container);
+			self._show($(this).data('target'), container);
 			e.preventDefault();
 		});
 
@@ -106,25 +100,32 @@ TabUI.prototype = {
 	 * function to change effect
 	 */
 	_show: function (element, container) {
-		if (!this.options.effect) {
-			// no effect
-			element.show();
-			return;
-		}
-		// with effect
-		element.css('visibility', 'hidden').show();
-		container.css({
-			overflow: 'hidden',
-			height: container.height()
-		}).animate({
-			height: element.outerHeight()
-		}, function() {
-			element.hide().css('visibility', 'visible').fadeIn();
-			container.css({
-				overflow: '',
-				height: ''
-			});
+		var currentHeight = container.height(); // save height
+		$.each(this.targets, function (i, target) {
+			if (target != element) {
+				target.hide();
+			} else {
+				target.css('visibility', 'hidden').show();
+			}
 		});
+		if (this.options.effect) {
+			// with effect
+			container.stop(true, true).css({
+				overflow: 'hidden',
+				height: currentHeight 
+			}).animate({
+				height: element.outerHeight()
+			}, 500, function() {
+				element.hide().css('visibility', 'visible').fadeIn();
+				container.css({
+					overflow: '',
+					height: ''
+				});
+			});
+		} else {
+			// no effect
+			element.css('visibility', 'show');
+		}
 	},
 
 	/**
