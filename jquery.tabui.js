@@ -53,7 +53,7 @@ TabUI.prototype = {
 				$(tab).addClass(self.options.offClassName);
 			}
 		});
-		self._initTabStyle();
+		self._bindEvent();
 	},
 
 	_initTab: function (tab) {
@@ -64,10 +64,7 @@ TabUI.prototype = {
 		tab.data('target', target);
 	},
 
-	/**
-	 * functions to change tab status
-	 */
-	_initTabStyle: function () {
+	_bindEvent: function () {
 		var self = this;
 		this.element.click(function (e) {
 			var clickedTab = this;
@@ -86,9 +83,6 @@ TabUI.prototype = {
 		});
 	},
 
-	/**
-	 * function to change effect
-	 */
 	_show: function (element) {
 		var self = this;
 		var currentHeight = this.container.height(); // save height
