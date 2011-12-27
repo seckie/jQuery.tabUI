@@ -73,7 +73,7 @@ TabUI.prototype = {
 				// animation is in progress
 				return false;
 			}
-			self._show($(clickedTab).data('target'));
+			self._show(clickedTab);
 			self._switchTab(clickedTab);
 			e.preventDefault();
 		});
@@ -93,14 +93,16 @@ TabUI.prototype = {
 		});
 	},
 
-	_show: function (element) {
+	_show: function (clickedTab) {
 		var self = this;
+		var target = $(clickedTab).data('target');
 		var currentHeight = this.container.height(); // save height
-		$.each(this.targets, function (i, target) {
-			if (target != element) {
-				target.hide();
+		if (!target) { return; }
+		$.each(this.targets, function () {
+			if (target != this) {
+				this.hide();
 			} else {
-				target.css('visibility', 'hidden').show();
+				this.css('visibility', 'hidden').show();
 			}
 		});
 		if (this.options.effect) {
@@ -109,9 +111,9 @@ TabUI.prototype = {
 				overflow: 'hidden',
 				height: currentHeight 
 			}).animate({
-				height: element.outerHeight()
+				height: target.outerHeight()
 			}, 500, function() {
-				element.hide().css('visibility', 'visible').fadeIn();
+				target.hide().css('visibility', 'visible').fadeIn();
 				self.container.css({
 					overflow: '',
 					height: ''
@@ -119,30 +121,32 @@ TabUI.prototype = {
 			});
 		} else {
 			// no effect
-			element.css('visibility', 'show');
+			target.css('visibility', 'show');
 		}
 	},
 
 	_watchURI: function () {
 		var self = this;
 		// initial hash modulation
-		var target = this._getTargetFromURI(location.href);
-		if (target) {
-			this._show(target);
-			this._switchTab();
+		var targetTab = this._getTargetTabFromURI(location.href);
+		if (targetTab) {
+			this._show(targetTab);
+			this._switchTab(targetTab);
 		}
 	},
 
-	_getTargetFromURI: function (uri) {
-		var target;
+	_getTargetTabFromURI: function (uri) {
+		var targetTab;
 		var hash = "";
 		var hashRegExp = /#[a-zA-Z0-9\-_]+$/;
 		if (hashRegExp.test(uri)) {
 			hash = uri.slice(uri.search(hashRegExp));
-			$.each(this.targets, function () {
-				if ($(hash)[0] === this[0]) { target = $(hash); }
+			$.each(this.element, function () {
+				if (hash === this.href.slice(this.href.search(hashRegExp))) {
+					targetTab = this;
+				}
 			});
-			return target;
+			return targetTab;
 		} else {
 			return false;
 		}
