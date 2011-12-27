@@ -5,7 +5,7 @@
  * @author     Naoki Sekiguchi (http://likealunatic.jp)
  * @copyright  Naoki Sekiguchi (http://likealunatic.jp)
  * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
- * @version    1.2
+ * @version    1.2.1
  * @since      2011-09-14 17:57:34
  */
 
@@ -113,7 +113,7 @@ TabUI.prototype = {
 			});
 		} else {
 			// no effect
-			element.css('visibility', 'show');
+			element.css('visibility', 'visible');
 		}
 	},
 
