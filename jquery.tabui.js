@@ -5,7 +5,7 @@
  * @author     Naoki Sekiguchi (http://likealunatic.jp)
  * @copyright  Naoki Sekiguchi (http://likealunatic.jp)
  * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
- * @version    1.3
+ * @version    1.3.1
  * @since      2011-09-14 17:57:34
  */
 
@@ -14,7 +14,7 @@
 $.fn.tabUI = function (options) {
 	var opt = options || {};
 	opt.element = this;
-	this.data('tabUI', new TabUI(opt));
+	if (this[0]) { this.data('tabUI', new TabUI(opt)); }
 	return this;
 };
 function TabUI() {
